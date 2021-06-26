@@ -1,14 +1,16 @@
-﻿using System;
+﻿using Common.Models.Product;
+using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ProductAPI.Repository.Interface
 {
     public interface IProductRepository
     {
         void DeleteProduct(Guid ProductId);
-        Models.Product GetProductByID(Guid productId);
-        List<Models.Product> GetProducts();
-        void InsertProduct(Models.Product product);
-        void UpdateProduct(Models.Product product);
+        Product GetProductByID(Guid productId);
+        Task<List<Product>> GetProducts();
+        void InsertProduct(Product product);
+        void UpdateProduct(Product product);
     }
 }

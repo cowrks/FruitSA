@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using ProductAPI.Models;
+﻿using Common.Models.Product;
+using Microsoft.AspNetCore.Mvc;
 using ProductAPI.Repository.Interface;
 using System;
 using System.Transactions;

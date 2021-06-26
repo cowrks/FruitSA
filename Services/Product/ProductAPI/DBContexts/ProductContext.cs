@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using ProductAPI.Models;
+﻿using Common.Models.Product;
+using Microsoft.EntityFrameworkCore;
 using System;
 
 namespace ProductAPI.DBContexts

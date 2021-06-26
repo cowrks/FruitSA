@@ -1,5 +1,6 @@
-using FruitSA.Infrastructure.Config;
-using FruitSA.Infrastructure.Interceptors;
+using Common.Infrastructure.Config;
+using Common.Infrastructure.Interceptors;
+using GrpcProduct;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -14,6 +15,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Web.HttpAggregator.Services.Implmentation;
+using Web.HttpAggregator.Services.Interface;
 
 namespace Web.HttpAggregator
 {
@@ -130,6 +133,14 @@ namespace Web.HttpAggregator
         public static IServiceCollection AddGrpcServices(this IServiceCollection services)
         {
             services.AddTransient<GrpcExceptionInterceptor>();
+
+            services.AddScoped<IProductService, ProductService>();
+
+            //services.AddGrpcClient<Product.ProductClient>((services, options) =>
+            //{
+            //    var basketApi = services.GetRequiredService<IOptions<UrlsConfig>>().Value.GrpcBasket;
+            //    options.Address = new Uri(basketApi);
+            //}).AddInterceptor<GrpcExceptionInterceptor>();
 
             return services;
         }

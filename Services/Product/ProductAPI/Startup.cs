@@ -4,11 +4,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using ProductAPI.DBContexts;
 using ProductAPI.Repository.Implementation;
 using ProductAPI.Repository.Interface;
+using ProductAPI.Services;
 using System.IO;
 
 namespace ProductAPI
@@ -99,13 +99,13 @@ namespace ProductAPI
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGrpcService<GreeterService>();
+                endpoints.MapGrpcService<ProductService>();
                 endpoints.MapDefaultControllerRoute();
                 endpoints.MapControllers();
                 endpoints.MapGet("/_proto/", async ctx =>
                 {
                     ctx.Response.ContentType = "text/plain";
-                    using var fs = new FileStream(Path.Combine(env.ContentRootPath, "Proto", "basket.proto"), FileMode.Open, FileAccess.Read);
+                    using var fs = new FileStream(Path.Combine(env.ContentRootPath, "Proto", "product.proto"), FileMode.Open, FileAccess.Read);
                     using var sr = new StreamReader(fs);
                     while (!sr.EndOfStream)
                     {

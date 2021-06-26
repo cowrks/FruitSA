@@ -5,25 +5,25 @@ option csharp_namespace = "GrpcProduct";
 package ProductAPI;
 
 service Product {
-	rpc GetProductById(ProductRequest) returns (ProductResponse) {}
-	rpc UpdateBasket(CustomerBasketRequest) returns (CustomerBasketResponse) {}
+	rpc GetProducts(ProductRequest) returns (ProductResponse) {}
+	rpc UpdateBasket(CustomerBasketRequest) returns (ProductResponse) {}
 }
 
 message ProductRequest {
-	guid ProductId = 1;
+	string ProductId = 1;
 }
 
 message CustomerBasketRequest {
 	string buyerid = 1;
-	repeated BasketItemResponse items = 2;
+	repeated ProductItemResponse items = 2;
 }
 
 message ProductResponse {
 	string buyerid = 1;
-	repeated BasketItemResponse items = 2;
+	repeated ProductItemResponse items = 10;
 }
 
-message BasketItemResponse {
+message ProductItemResponse {
 	string id = 1;
 	int32 productid = 2;
 	string productname = 3;

@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Common.Models.Product;
+using Microsoft.EntityFrameworkCore;
 using ProductAPI.DBContexts;
 using ProductAPI.Repository.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ProductAPI.Repository.Implementation
 {
@@ -16,23 +18,23 @@ namespace ProductAPI.Repository.Implementation
             _dbContext = dbContext;
         }
 
-        public Models.Product GetProductByID(Guid productId)
+        public Product GetProductByID(Guid productId)
         {
             return _dbContext.Products.Find(productId);
         }
 
-        public List<Models.Product> GetProducts()
+        public async Task<List<Product>> GetProducts()
         {
-            return _dbContext.Products.ToList();
+            return await _dbContext.Products.ToListAsync();
         }
 
-        public void InsertProduct(Models.Product product)
+        public void InsertProduct(Product product)
         {
             _dbContext.Add(product);
             Save();
         }
 
-        public void UpdateProduct(Models.Product product)
+        public void UpdateProduct(Product product)
         {
             _dbContext.Entry(product).State = EntityState.Modified;
             Save();
